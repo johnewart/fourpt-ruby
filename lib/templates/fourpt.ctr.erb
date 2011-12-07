@@ -1,0 +1,51 @@
+        Hypothetical example, rapid expansion.
+                 Lew DeLong, May, 1991.
+<%= @model.terms %>          / Terms, 1=dynamic, 2=diffusion, 3=kinematic
+<%= @model.density %>        / 0 = constant density, 1 = variable density.
+<%= @model.sinuosity %>      / 0 = constant sinuosity, 1 = variable sinuosity.
+<%= @model.read_boundary %>  / 0 = do not read boundary values, 1 = read values.
+<%= @model.perturbation %>   / 0 = perturbation inactive, 1 = perturbation active.
+32.2       / acceleration due to gravity.
+
+<%= @model.maxtimesteps %>   / MaxTimeSteps, maximum number of time steps.
+<%= @model.start_time %>     / NetStartTime, starting elapse time, in seconds.
+<%= @model.time_step %>      / DT, time step, in seconds.
+<%= @model.time_weight %>    / Theta, time-weighting factor.
+0.5, 1.0   / local ( 0 to 1 ) quadrature-point coordinate and weight, paired. 
+
+<%= @model.max_iterations %> / MaxIterations, maximum number of iterations per time step.
+1          / LuInc, interval for complete forward elimnations.
+0.005      / ToleranceQ, tolerance for closure on discharge.
+0.005      / ToleranceY, tolerance for closure on water-surface elevation.
+
+<%= @model.printlevel %>     / PrintLevel, amount of printing, 0 to 9, increasing with number.
+0          / PrintCount, initial value of print counter.
+20         / PrintInc, print increment.
+0          / TimeSeriesCount, initial value of time-series counter.
+1          / TimeSeriesInc, time-series increment.
+1, 0.0,
+1, 12800.  / Requested time-series output, paired channel no. & downstream distance.
+
+0          / SpaceCount, initial value of spatial-series output counter.
+20         / SpaceInc, spatial-series increment.
+
+0          / RestartFile, if 1, write restart file.
+
+1          / ChannelNumber, for equation boundary (+ upstream, - downstream).
+1          / Number of sinusoidal compontents.
+2000.5     / Base, base value for equation boundary condition.
+
+1999.5     / Amplitude.
+3.33       / Period, in hours.
+1.67       / Phase angle, in hours.
+
+0.0        / EqStart, time at which equation takes effect.
+1.667      / EqStop, time at which equation is no longer effective.
+
+
+-1         / Channel number for equation boundary (+ upstream, - downstream).
+0          / Number of sinusoidal components.
+2.2        / Base, base value for equation boundary condition.
+
+0.0        / EqStart, time at which equation takes effect.
+1.667      / EqStop, time at which equation is no longer effective.

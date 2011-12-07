@@ -1,0 +1,14 @@
+<% @channels.each do |c| %>
+<%= c.number %>          / branch number
+    <%= c.cross_sections.length %>, <%= c.dx %>, <%= c.nkeep %>, <%= c.icndap %>, 0  / no. of cx, dx, NKEEP, ICNDAP, NVAL
+Upstream_<%= c.number%>               / cx ID
+    <%= c.upstream.water_elevation %>, <%= c.upstream.discharge %>       / WS, Q
+Downstream_<%= c.number %>             / cx ID
+    <%= c.upstream.water_elevation %>, <%= c.upstream.discharge %>       / WS, Q
+
+ 2                       /condition code     upstream
+  0                      /connections
+
+ 1                       /condition code     downstream
+  0                      /connections
+<% end %>

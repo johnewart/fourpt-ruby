@@ -1,0 +1,12 @@
+0                  / output index ( 0 - no echo, 1 - echo ).
+
+<% 
+@channels.each do |c|
+%>
+<%= c.number %>       / channel number.
+<%= c.resistance %>   / flow resistance coefficient.
+Upstream_<%= c.number %>  / upstream cx ID.
+0.0 <%= c.upstream.width %> <%= c.upstream.elevation %> / downstream ref. distance, width, btmelev.
+Downstream_<%= c.number %>       / downstream cx ID.
+<%= c.length %> <%= c.downstream.width %> <%= c.downstream.elevation %> / downstream ref. distance, width, btmelev.
+<% end %>
