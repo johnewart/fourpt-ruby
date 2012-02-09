@@ -1,7 +1,17 @@
-#!/usr/bin/env ruby
 require "erb"
 
 module FourPoint
+  APPROXIMATIONS = {
+    :user_input => 0, 
+    :normal_depth => 1, 
+    :unused => 2, 
+    :channel_filled => 3, 
+    :max_elevation => 4, 
+    :initial_values => 5, 
+    :not_approximated => 6, 
+    :steady_flow => 7
+  }
+
 
   # = Channel
   #
@@ -12,42 +22,49 @@ module FourPoint
     attr_reader :name
     attr_accessor :channels, :terms, :density, :sinuosity, :read_boundary, :perturbation,
                   :gravity, :maxtimesteps, :start_time, :time_step, :time_weight, 
-                  :max_iterations, :lu_inc, :tolerance_q, :tolerance_y, :printlevel, :icndap
+                  :max_iterations, :lu_inc, :tolerance_q, :tolerance_y, :printlevel,
+                  :amplitude, :period, :phase_angle, :start_time, :end_time, :description
 
-    APPROXIMATIONS = {
-      :user_input => 0, 
-      :normal_depth => 1, 
-      :unused => 2, 
-      :channel_filled => 3, 
-      :max_elevation => 4, 
-      :initial_values => 5, 
-      :not_approximated => 6, 
-      :steady_flow => 7
-    }
-    
+        
     ##
     # Create a new model.
     #
     def initialize(name="FourPoint")
-     @name = name
-     @channels = []
-   
-     @terms = 1                 # Terms, 1=dynamic, 2=diffusion, 3=kinematic
-     @density = 0               # 0 = constant density, 1 = variable density.
-     @sinuosity = 0             # 0 = constant sinuosity, 1 = variable sinuosity.
-     @read_boundary = 0         # 0 = do not read boundary values, 1 = read values.
-     @perturbation = 0          # 0 = perturbation inactive, 1 = perturbation active.
-     @gravity = 32.2            # acceleration due to gravity (ft/s^2)
-     @maxtimesteps = 0          # MaxTimeSteps, maximum number of time steps.
-     @start_time = 0            # NetStartTime, starting elapse time, in seconds.
-     @time_step = 60            # DT, time step, in seconds.
-     @time_weight = 1           # Theta, time-weighting factor.
-     @max_iterations = 10       # MaxIterations, maximum number of iterations per time step.
-     @lu_inc = 1                # LuInc, interval for complete forward eliminations.
-     @tolerance_q = 0.005       # ToleranceQ, tolerance for closure on discharge.
-     @tolerance_y = 0.005       # ToleranceY, tolerance for closure on water-surface elevation.
-     @printlevel  = 1           # PrintLevel, amount of printing, 0 to 9, increasing with number
-     @icndap      = 0           # Type of approximation used
+      @name = name
+      @description = ""
+      @channels = []
+
+      @terms = 1                 # Terms, 1=dynamic, 2=diffusion, 3=kinematic
+      @density = 0               # 0 = constant density, 1 = variable density.
+      @sinuosity = 0             # 0 = constant sinuosity, 1 = variable sinuosity.
+      @read_boundary = 0         # 0 = do not read boundary values, 1 = read values.
+      @perturbation = 0          # 0 = perturbation inactive, 1 = perturbation active.
+      @gravity = 32.2            # acceleration due to gravity (ft/s^2)
+      @maxtimesteps = 0          # MaxTimeSteps, maximum number of time steps.
+      @start_time = 0            # NetStartTime, starting elapse time, in seconds.
+      @time_step = 60            # DT, time step, in seconds.
+      @time_weight = 1           # Theta, time-weighting factor.
+      @max_iterations = 10       # MaxIterations, maximum number of iterations per time step.
+      @lu_inc = 1                # LuInc, interval for complete forward eliminations.
+      @tolerance_q = 0.005       # ToleranceQ, tolerance for closure on discharge.
+      @tolerance_y = 0.005       # ToleranceY, tolerance for closure on water-surface elevation.
+      @printlevel  = 1           # PrintLevel, amount of printing, 0 to 9, increasing with number
+
+      @start_time  = 0           # Beginning time (in hours) of the time interval
+      @end_time  = 100           # Ending time (in hours) of the time interval 
+
+      @amplitude
+      @period
+      @phase_angle
+
+    end
+
+    def description_lines
+      lines = description.split("\n")[0..1].collect {|s| s[0..79]}
+      (0..2 - lines.length).each do |l|
+        lines << ""
+      end
+      lines
     end
     
     def outfile

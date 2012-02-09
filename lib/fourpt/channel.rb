@@ -16,7 +16,9 @@ class Channel
       @length = 0              # length of channel
       @number = 0              # identifying number
       @dx     = 0              # desired computational cross-section length
-      @icndap = 1              # approximation method (default = 1)
+      @phase_angle 
+                               # approximation method (default = 1)
+      @approximation_type = :depth_computation              
       @boundary_condition = 1  # boundary condition code
       @nkeep  = 1              # NKEEP (TODO)
   end
@@ -29,8 +31,14 @@ class Channel
     return @cross_sections[-1]
   end
 
-  attr_accessor :cross_sections, :length, :resistance, :number, :dx, :icndap, :nkeep, :water_elevation, :discharge,
-                :boundary_condition
+  def icndap=(icndap_symbol)
+    @icndap = FourPoint::APPROXIMATIONS[icndap_symbol]
+  end
+
+  attr_reader   :icndap
+
+  attr_accessor :cross_sections, :length, :resistance, :number, :dx, :nkeep, :water_elevation, :discharge,
+                :boundary_condition, :phase_angle, :period
 
 
 end

@@ -10,7 +10,7 @@
 # See VERSION.yml
 #
 # == Author
-# John Ewart <john@unixninjas.org>
+# John Ewart <john@johnewart.net>
 #
 # == License
 # This program is free software; you can redistribute it and/or modify it
@@ -22,8 +22,6 @@
 #
 # b) the "Artistic License" which comes with Perl.
 
-# = Gearman
-#
 # == Usage
 #  require 'fourpt'
 #

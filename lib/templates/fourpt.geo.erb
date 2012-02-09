@@ -3,10 +3,10 @@
 <% 
 @channels.each do |c|
 %>
-<%= c.number %>       / channel number.
-<%= c.resistance %>   / flow resistance coefficient.
-Upstream_<%= c.number %>  / upstream cx ID.
-0.0 <%= c.upstream.width %> <%= c.upstream.elevation %> / downstream ref. distance, width, btmelev.
-Downstream_<%= c.number %>       / downstream cx ID.
-<%= c.length %> <%= c.downstream.width %> <%= c.downstream.elevation %> / downstream ref. distance, width, btmelev.
+<%= c.number %>                           / channel number.
+<%= c.resistance %>                       / flow resistance coefficient.
+Upstream_<%= c.number %>                  / upstream cx ID.
+0.0 <%= sprintf "%.1f", c.upstream.width %> <%= sprintf "%.1f", c.upstream.elevation %>           / downstream ref. distance, width, btmelev.
+Downstream_<%= c.number %>                / downstream cx ID.
+<%= sprintf "%.1f", c.length %> <%= sprintf "%.1f", c.downstream.width %> <%= c.downstream.elevation %>              / downstream ref. distance, width, btmelev.
 <% end %>

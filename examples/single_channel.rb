@@ -9,6 +9,8 @@ c.number = 1
 c.length = 12800
 c.resistance = 0.026
 c.dx = 1280 # ten computational cross-sections
+c.nkeep = 1
+c.icndap = :steady_flow
 
 upstream = CrossSection.new()
 upstream.width = 100
@@ -27,10 +29,14 @@ c.cross_sections << downstream
 
 m = Model.new("single_channel")
 m.channels << c
-m.icndap = 7
 m.maxtimesteps = 80
 m.time_step = 300
 m.time_weight = 0.6
+m.amplitude = 1999.5
+m.period = 3.33
+m.phase_angle = 1.67
+m.start_time = 0.0
+m.end_time = 1.667
 m.export()
 
 
